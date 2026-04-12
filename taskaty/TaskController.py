@@ -65,3 +65,17 @@ class TaskController:
             formmated_task.append({'no.': number, **task, 'due_date': due_date})
 
         print(tabulate(formmated_task, headers='keys'))
+
+    def display(self, args):
+        all_tasks = self.list_all_tasks()
+        unchecked_tasks = self.list_tasks()
+        if not all_tasks:
+            print("There are no tasks. To add task use 'add' command")
+            return
+        if args.all:
+            self.print_table(all_tasks)
+        else:
+            if unchecked_tasks:
+                self.print_table(unchecked_tasks)
+            else:
+                print("All tasks are checked!")
