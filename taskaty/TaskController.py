@@ -53,3 +53,15 @@ class TaskController:
         end_date = date.fromisoformat(end)
         date_delta = end_date - start_date
         return f"{date_delta.days} days left."
+    
+    def print_table(self, tasks):
+        formmated_task = []
+        for number, task in enumerate(tasks, 1):
+            if task["start_date"] and task["end_date"]:
+                due_date = self.due_date(task["start_date"], task["end_date"])
+            else:
+                due_date = "Open"
+            
+            formmated_task.append({'no.': number, **task, 'due_date': due_date})
+
+        print(tabulate(formmated_task, headers='keys'))
