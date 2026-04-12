@@ -110,3 +110,8 @@ class TaskController:
         with open(self.file_name, 'w') as file:
             for line in all_tasks:
                 self.add_task(Namespace(**line))
+
+    def reset(self, *args):
+        with open(self.file_name, 'w') as file:
+            file.write("")
+        print("All tasks are deleted!")
