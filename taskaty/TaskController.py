@@ -93,3 +93,20 @@ class TaskController:
         with open(self.file_name, 'w') as file:
             for line in all_tasks:
                 self.add_task(Namespace(**line))
+
+    def remove_task(self, args):
+        all_tasks = self.list_all_tasks()
+        if args.task:
+            index = args.task
+        else:
+            index = len(all_tasks)-1
+
+        if index<=0 or index>=len(all_tasks):
+            print(f"The number of task {index} does not exist!")
+            return
+        
+        all_tasks.pop(index-1)
+
+        with open(self.file_name, 'w') as file:
+            for line in all_tasks:
+                self.add_task(Namespace(**line))
