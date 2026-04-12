@@ -18,7 +18,6 @@ class TaskController:
 
         with open(self.file_name, 'a') as file:
             file.write(str(task) + '\n')
-        print(f"Task '{task.title}' added successfully!")
 
     def list_tasks(self):
         unfinished_tasks = []
@@ -84,7 +83,7 @@ class TaskController:
     def check_task(self, args):
         index = args.task
         all_tasks = self.list_all_tasks()
-        if index<=0 or index>=len(all_tasks):
+        if index <= 0 or index > len(all_tasks):
             print(f"The number of task {index} does not exist!")
             return
         
@@ -99,9 +98,9 @@ class TaskController:
         if args.task:
             index = args.task
         else:
-            index = len(all_tasks)-1
+            index = len(all_tasks)
 
-        if index<=0 or index>=len(all_tasks):
+        if index <= 0 or index > len(all_tasks):
             print(f"The number of task {index} does not exist!")
             return
         
