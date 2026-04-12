@@ -1,6 +1,7 @@
 from taskaty.Task import Task
 from datetime import date
 from tabulate import tabulate
+from argparse import Namespace
 
 class TaskController:
 
@@ -79,3 +80,16 @@ class TaskController:
                 self.print_table(unchecked_tasks)
             else:
                 print("All tasks are checked!")
+
+    def check_task(self, args):
+        index = args.task
+        all_tasks = self.list_all_tasks()
+        if index<=0 or index>=len(all_tasks):
+            print(f"The number of task {index} does not exist!")
+            return
+        
+        all_tasks[index-1]["done"] = True
+
+        with open(self.file_name, 'w') as file:
+            for line in all_tasks:
+                self.add_task(Namespace(**line))
