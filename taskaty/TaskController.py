@@ -47,3 +47,9 @@ class TaskController:
                                   'start_date': start_date, 'end_date': end_date,
                                   'done': done})
         return all_tasks
+    
+    def due_date(self, start, end):
+        start_date = date.fromisoformat(start)
+        end_date = date.fromisoformat(end)
+        date_delta = end_date - start_date
+        return f"{date_delta.days} days left."
