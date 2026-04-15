@@ -1,7 +1,6 @@
 # 📝 Taskaty CLI
 A simple command-line task manager built with Python.
- 
----
+
 
 ## ✨ Features
 - **Add Tasks:** Quickly add tasks with titles, descriptions, and deadlines.
