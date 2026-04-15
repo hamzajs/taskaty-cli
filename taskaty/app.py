@@ -1,6 +1,8 @@
 from argparse import ArgumentParser
+from TaskController import TaskController
 
 def main():
+    controller = TaskController("Tasks_Data.txt")
     parser = ArgumentParser(description="Simple ClI Task Manager")
     subparsers = parser.add_subparsers()
 
@@ -10,19 +12,25 @@ def main():
     add_task.add_argument("-s", "--start_date", help="Date to begin the task.", type=str, default=None)
     add_task.add_argument("-e", "--end_date", help="Date to end the task.", type=str, default=None)
     add_task.add_argument("--done", help="The task is done or not!", default=False)
+    add_task.set_defaults(func = controller.add_task)
 
-    list_task = subparsers.add_parser("list", help="List the tasks.")
+    list_task = subparsers.add_parser("list", help="List unfinished tasks.")
     list_task.add_argument("-a", "--all", help="List all tasks.", )
+    list_task.set_defaults(func = controller.display)
 
     check_task = subparsers.add_parser("check", help="Check the task.")
     check_task.add_argument("-t", "-task", help="Number of the task to be done.", type=int)
+    check_task.set_defaults(func = controller.check_task)
 
     remove_task = subparsers.add_parser("remove", help="Remove the task.")
     remove_task.add_argument("-t", "-task", help="Number of the task to remove.", type=int)
+    remove_task.set_defaults(func = controller.remove_task)
 
     reset_tasks = subparsers.add_parser("reset", help="Remove all tasks")
+    reset_tasks.set_defaults(func = controller.reset)
 
     args = parser.parse_args()
+    args.func(args)
 
 if __name__ == "__main__":
     main()
