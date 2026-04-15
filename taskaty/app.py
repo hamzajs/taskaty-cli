@@ -4,6 +4,7 @@ from .TaskController import TaskController
 def main():
     controller = TaskController("Tasks_Data.txt")
     parser = ArgumentParser(description="Simple ClI Task Manager")
+    parser.set_defaults(func=None)
     subparsers = parser.add_subparsers()
 
     add_task = subparsers.add_parser("add", help="Add Task.")
@@ -30,6 +31,9 @@ def main():
     reset_tasks.set_defaults(func = controller.reset)
 
     args = parser.parse_args()
+    if not args.func:
+        parser.print_help()
+        exit()
     args.func(args)
 
 if __name__ == "__main__":
