@@ -1,4 +1,4 @@
-from taskaty.Task import Task
+from .Task import Task
 from datetime import date
 from tabulate import tabulate
 from argparse import Namespace
