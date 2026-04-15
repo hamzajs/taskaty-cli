@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from TaskController import TaskController
+from .TaskController import TaskController
 
 def main():
     controller = TaskController("Tasks_Data.txt")
@@ -19,11 +19,11 @@ def main():
     list_task.set_defaults(func = controller.display)
 
     check_task = subparsers.add_parser("check", help="Check the task.")
-    check_task.add_argument("-t", "-task", help="Number of the task to be done.", type=int)
+    check_task.add_argument("-t", "--task", help="Number of the task to be done.", type=int)
     check_task.set_defaults(func = controller.check_task)
 
     remove_task = subparsers.add_parser("remove", help="Remove the task.")
-    remove_task.add_argument("-t", "-task", help="Number of the task to remove.", type=int)
+    remove_task.add_argument("-t", "--task", help="Number of the task to remove.", type=int)
     remove_task.set_defaults(func = controller.remove_task)
 
     reset_tasks = subparsers.add_parser("reset", help="Remove all tasks")
